@@ -1,3 +1,8 @@
+### Diagrama de Sequência: Registro de Venda
+
+Este diagrama ilustra o fluxo de mensagens para registrar uma venda no sistema.
+
+```mermaid
 sequenceDiagram
     title Fluxo: Vendedor Registra uma Nova Venda
 
