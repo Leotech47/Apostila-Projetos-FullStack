@@ -1,0 +1,60 @@
+graph TD
+    %% Atores
+    actor(Administrador)
+    actor1(Vendedor)
+    actor2(Cliente)
+
+    %% Subsistema
+    subgraph Sistema de Gerenciamento de Vendas
+        usecase_login(Realizar Login)
+        usecase_logout(Realizar Logout)
+        
+        %% Casos de Uso do Administrador
+        subgraph Gerenciar Sistema
+            usecase_gerenciar_usuarios(Gerenciar Usuários)
+            usecase_gerenciar_produtos(Gerenciar Produtos)
+            usecase_gerenciar_vendas(Visualizar Vendas e Relatórios)
+        end
+        
+        %% Casos de Uso do Vendedor
+        subgraph Gerenciar Vendas
+            usecase_registrar_venda(Registrar Venda)
+            usecase_gerenciar_clientes(Gerenciar Clientes)
+            usecase_consultar_estoque(Consultar Estoque)
+        end
+
+        %% Casos de Uso do Cliente
+        subgraph Interagir com o Sistema
+            usecase_visualizar_produtos(Visualizar Produtos)
+            usecase_comprar(Realizar Compra)
+            usecase_consultar_pedido(Consultar Status do Pedido)
+        end
+    end
+
+    %% Relações (Associações)
+    Administrador --> usecase_login
+    Administrador --> usecase_logout
+    Administrador --> usecase_gerenciar_usuarios
+    Administrador --> usecase_gerenciar_produtos
+    Administrador --> usecase_gerenciar_vendas
+
+    Vendedor --> usecase_login
+    Vendedor --> usecase_logout
+    Vendedor --> usecase_registrar_venda
+    Vendedor --> usecase_gerenciar_clientes
+    Vendedor --> usecase_consultar_estoque
+
+    Cliente --> usecase_visualizar_produtos
+    Cliente --> usecase_comprar
+    Cliente --> usecase_consultar_pedido
+    Cliente --> usecase_login
+
+    %% Relações de Inclusão (<<include>>) e Extensão (<<extend>>)
+    usecase_gerenciar_usuarios -- <<include>> --> usecase_login
+    usecase_gerenciar_produtos -- <<include>> --> usecase_login
+    usecase_gerenciar_vendas -- <<include>> --> usecase_login
+    usecase_registrar_venda -- <<include>> --> usecase_login
+    usecase_gerenciar_clientes -- <<include>> --> usecase_login
+    usecase_consultar_estoque -- <<include>> --> usecase_login
+
+    usecase_comprar -- <<include>> --> usecase_visualizar_produtos
