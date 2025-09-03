@@ -44,3 +44,44 @@ Fico à disposição para complementar conforme sua necessidade.
 [14]: https://en.wikipedia.org/wiki/Google_Compute_Engine?utm_source=chatgpt.com "Google Compute Engine"
 [15]: https://www.techradar.com/best/best-cloud-computing-services?utm_source=chatgpt.com "Best cloud computing provider of 2025"
 [16]: https://www.techradar.com/pro/website-hosting/best-hosting-for-agencies?utm_source=chatgpt.com "Best hosting for agencies"
+
+---
+
+Boa pergunta 👍
+
+Para **aplicações web de pequeno porte**, onde **baixo custo operacional** e **facilidade de uso** são prioridade, os grandes players (AWS, Azure e GCP) acabam ficando caros e complexos. Aí entram alternativas mais enxutas e diretas:
+
+---
+
+### 🔹 Comparativo focado em **pequenos projetos**
+
+| **Provedor**                               | **Preço inicial** (aprox.)                                              | **Facilidade de Deploy**                                            | **Segurança**                            | **Indicado para**                                         |
+| ------------------------------------------ | ----------------------------------------------------------------------- | ------------------------------------------------------------------- | ---------------------------------------- | --------------------------------------------------------- |
+| **DigitalOcean (Droplets / App Platform)** | US\$ 5/mês (1 vCPU, 1 GB RAM)                                           | Painel simples; deploy direto do GitHub; App Platform é tipo Heroku | Firewall, snapshots básicos              | Pequenas APIs, sites estáticos, apps simples              |
+| **Linode (Akamai Cloud)**                  | US\$ 5/mês (1 vCPU, 1 GB RAM)                                           | Interface intuitiva; integrações fáceis                             | Segurança razoável; backups pagos        | Projetos de baixo custo com bom suporte global            |
+| **Vultr**                                  | US\$ 5/mês (1 vCPU, 1 GB RAM)                                           | Deploy rápido em VMs; oferece scripts automáticos                   | SSL, firewall, snapshots                 | Alternativa a DigitalOcean, boa latência em alguns países |
+| **Heroku (Free/Basic)**                    | Plano gratuito limitado (com "sleep mode"); pago a partir de US\$ 7/dyn | Deploy muito simples via Git; ótimo para iniciantes                 | Segurança gerenciada pela plataforma     | Prototipagem, MVPs, apps de estudo                        |
+| **Render**                                 | Free tier (limite de uso); planos pagos a partir de US\$ 7/mês          | Deploy direto do GitHub; suporte a backend, frontend e DB           | SSL automático, backups básicos          | Substituto moderno ao Heroku                              |
+| **Railway.app**                            | Plano gratuito (US\$ 5 créditos/mês); pago a partir de US\$ 5           | Deploy extremamente simples, integração com bancos de dados         | Segurança básica                         | Protótipos rápidos, projetos pessoais                     |
+| **Vercel (frontend)**                      | Free tier (ótimo para sites estáticos/Next.js)                          | Deploy automático do GitHub/GitLab/Bitbucket                        | HTTPS automático, isolamento por projeto | Frontend React/Next.js; combinado com DB externo          |
+| **Netlify (frontend)**                     | Free tier; planos pagos a partir de US\$ 19/mês                         | Deploy automático, funções serverless                               | HTTPS automático                         | Sites estáticos, JAMstack                                 |
+
+---
+
+### 🔹 Resumindo:
+
+* **Mais barato e simples** → **DigitalOcean / Linode / Vultr** (boa relação custo x recurso).
+* **Mais fácil para iniciantes** → **Heroku / Render / Railway** (deploy em 1 clique).
+* **Melhor para front-end estático** → **Vercel / Netlify** (grátis na maioria dos casos).
+
+👉 Estratégia comum:
+
+* Hospedar **frontend** no **Vercel** (grátis).
+* Rodar **backend + banco** em **Railway** (grátis até um certo limite) ou **DigitalOcean Droplet de US\$ 5**.
+
+---
+
+Quer que eu monte um **cenário de arquitetura enxuto (frontend + backend + banco)** mostrando o **menor custo possível** para rodar uma aplicação completa?
+---
+
+
