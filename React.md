@@ -1,3 +1,4 @@
+#Aula 01
 Aqui vai um “guia de professor”, direto ao ponto, para você dominar **React** no desenvolvimento de aplicações web modernas.
 
 # O que é o React
@@ -140,4 +141,266 @@ Se quiser, eu monto um **roteiro prático** com mini-projetos (SPA com Router, d
 [9]: https://reactrouter.com/how-to/react-server-components?utm_source=chatgpt.com "React Server Components"
 ---
 
+# Aula 02
+Ótimo 👨‍🏫
+Vou montar um **roteiro prático de aprendizado de React** com **mini-projetos progressivos**, cada um cobrindo conceitos-chave e com exemplos que você pode implementar.
 
+---
+
+# 🚀 Roteiro prático de estudos em React
+
+## 1. Fundamentos do React (JSX, componentes, props e state)
+
+📌 **Mini-projeto:** Contador simples
+
+* Criar um componente `<Contador />` com botão que incrementa um número.
+* Usar `useState` para armazenar o valor.
+* Aprender a passar `props` (ex: valor inicial).
+
+---
+
+## 2. Hooks essenciais e ciclo de vida
+
+📌 **Mini-projeto:** Lista de tarefas (To-Do List)
+
+* Adicionar e remover tarefas.
+* Usar `useState` para a lista.
+* Usar `useEffect` para salvar no `localStorage`.
+* Introduzir `useRef` para capturar o input.
+
+---
+
+## 3. Roteamento
+
+📌 **Mini-projeto:** SPA com múltiplas páginas
+
+* Instalar **React Router**.
+* Criar páginas: Home, Sobre e Contato.
+* Navegar entre elas sem recarregar o navegador.
+
+---
+
+## 4. Consumo de API e Suspense
+
+📌 **Mini-projeto:** App de busca de usuários
+
+* Criar busca na API do GitHub.
+* Mostrar estado de carregamento (`loading`).
+* Introduzir `Suspense` com fallback para simular carregamento.
+
+---
+
+## 5. Formulários modernos (React 19 – Actions e `useActionState`)
+
+📌 **Mini-projeto:** Formulário de login
+
+* Criar `<form>` com `action={minhaAction}`.
+* Usar `useActionState` para tratar envio, erro e estado pendente.
+* Mostrar feedback para o usuário (“Salvando…”, erros, etc.).
+
+---
+
+## 6. Estado global
+
+📌 **Mini-projeto:** Carrinho de compras
+
+* Criar contexto (`CartContext`).
+* Adicionar e remover itens.
+* Usar `useReducer` para gerenciar o estado do carrinho.
+* Mostrar quantidade total em um ícone fixo.
+
+---
+
+## 7. React Server Components (com Next.js)
+
+📌 **Mini-projeto:** Dashboard de produtos
+
+* Criar projeto Next.js (App Router).
+* Buscar produtos do banco (ou API mock) diretamente em um Server Component.
+* Renderizar tabela no servidor → cliente só recebe HTML leve.
+
+---
+
+## 8. Server Actions e formulários com Next.js
+
+📌 **Mini-projeto:** CRUD de produtos
+
+* Criar Server Actions para `createProduct`, `updateProduct`, `deleteProduct`.
+* Conectar formulários a essas Actions.
+* Usar `useFormStatus` para mostrar estado de loading.
+
+---
+
+## 9. Testes e qualidade
+
+📌 **Mini-projeto:** Testando a To-Do List (do item 2)
+
+* Usar **React Testing Library** e **Vitest**.
+* Testar: adicionar tarefa, marcar como concluída, remover.
+* Garantir acessibilidade (botões com labels corretos).
+
+---
+
+## 10. Deploy e boas práticas
+
+📌 **Mini-projeto:** Publicando o Dashboard no Vercel
+
+* Criar repositório no GitHub.
+* Deploy automático no Vercel.
+* Configurar variáveis de ambiente.
+* Usar **Lighthouse** para checar performance e acessibilidade.
+
+---
+
+👉 Esse roteiro cobre a jornada de **iniciante → intermediário → avançado** no React moderno, passando de **JSX** até **Server Actions** em Next.js.
+
+---
+
+Quer que eu prepare os **códigos-base de cada mini-projeto** (já prontos para rodar no VSCode) ou prefere que eu monte **passo a passo guiado** para você ir codando e entendendo?
+
+---
+
+Aula 03
+# Roteiro prático — **Contador simples** (passo a passo para codar e entender)
+
+Vou ser objetivo e direto. Siga estes passos no seu ambiente (Node.js instalado).
+
+---
+
+## 1) Criar o projeto (Vite + React)
+
+No terminal:
+
+```bash
+# cria o projeto
+npm init vite@latest contador-leotech -- --template react
+
+cd contador-leotech
+npm install
+
+# iniciar servidor de desenvolvimento
+npm run dev
+```
+
+Abra `http://localhost:5173` (porta mostrada no terminal).
+
+---
+
+## 2) Estrutura mínima (arquivos que vamos usar)
+
+```
+contador-leotech/
+├─ index.html
+├─ src/
+│  ├─ main.jsx
+│  ├─ App.jsx
+│  ├─ styles.css
+│  └─ components/
+│     └─ Contador.jsx
+```
+
+---
+
+## 3) Componente `Contador.jsx`
+
+Crie `src/components/Contador.jsx` com este código:
+
+```jsx
+import React, { useState } from "react";
+
+export default function Contador({ inicial = 0, passo = 1 }) {
+  // state local: valor do contador
+  const [valor, setValor] = useState(inicial);
+
+  // atualiza usando função (prevState) para evitar problemas de concorrência
+  const incrementar = () => setValor(v => v + passo);
+  const decrementar = () => setValor(v => v - passo);
+  const reset = () => setValor(inicial);
+
+  return (
+    <div className="contador">
+      <h2>Contador</h2>
+      <p>Valor: <strong>{valor}</strong></p>
+
+      <div className="botoes">
+        <button aria-label="decrementar" onClick={decrementar}>−</button>
+        <button aria-label="incrementar" onClick={incrementar}>+</button>
+        <button aria-label="reset" onClick={reset}>Reset</button>
+      </div>
+    </div>
+  );
+}
+```
+
+**Explicação rápida**:
+
+* `useState(inicial)` cria o estado local `valor` com valor inicial vindo da `prop` `inicial`.
+* `incrementar`/`decrementar` usam o *functional update* `setValor(v => v + passo)` — recomendado quando o novo valor depende do anterior.
+* `inicial` e `passo` são **props** com valores padrão (`0` e `1`).
+
+---
+
+## 4) Usar o componente em `App.jsx`
+
+Edite `src/App.jsx`:
+
+```jsx
+import React from "react";
+import Contador from "./components/Contador";
+import "./styles.css";
+
+export default function App() {
+  return (
+    <main>
+      <h1>Exemplo: Contador</h1>
+
+      {/* contador com props */}
+      <Contador inicial={5} passo={2} />
+
+      {/* contador com valores padrão */}
+      <Contador />
+    </main>
+  );
+}
+```
+
+Rode a página e verifique dois contadores funcionando (um inicia em 5 e soma 2).
+
+---
+
+## 5) Estilos rápidos (`styles.css`)
+
+Crie `src/styles.css`:
+
+```css
+body { font-family: system-ui, Arial; padding: 24px; }
+.contador { border: 1px solid #ddd; padding: 12px; margin: 8px 0; width: 220px; }
+.botoes button { margin-right: 6px; padding: 6px 10px; }
+```
+
+---
+
+## 6) Teste e verificação
+
+* Clique em `+` / `−` / `Reset` e observe o valor.
+* Abra DevTools → Components (React DevTools) para inspecionar estado.
+* Se quiser ver logs, adicione `console.log(valor)` dentro do componente (apenas para debugging).
+
+---
+
+## 7) Pontos importantes e boas práticas (resumido)
+
+* **Imutabilidade**: não mutacione diretamente `valor`, use `setValor`.
+* **Functional update** evita problemas quando várias atualizações ocorrem juntas.
+* **Props** são imutáveis dentro do componente; se a prop `inicial` mudar e você quiser que o state acompanhe, use `useEffect` para sincronizar (explico se quiser).
+* **Acessibilidade**: botões com `aria-label` e elementos semânticos.
+
+---
+
+## 8) Exercícios rápidos (próximo passo)
+
+1. Adicionar input para alterar `passo` dinamicamente.
+2. Persistir o valor no `localStorage` com `useEffect`.
+3. Converter para TypeScript (`.tsx`) e tipar props.
+
+Se quiser, eu já gero os trechos para `localStorage` e o input para `passo` — qual desses você prefere agora?
